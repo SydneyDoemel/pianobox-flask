@@ -204,3 +204,30 @@ class Songs(db.Model):
                 'song_url':self.song_url
                 
             }
+
+
+class Folder(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    filename=db.Column(db.String(400), nullable=False)
+    foldername= db.Column(db.String(100), nullable=False)
+    url= db.Column(db.String(500), nullable=False)
+
+    def __init__(self, user_id, filename, foldername, url):
+        self.user_id = user_id
+        self.filename = filename
+        self.foldername = foldername
+        self.url=url
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+    def to_dict(self):
+            return {
+                'user_id': self.user_id,
+                'filename': self.filename,
+                'foldername': self.foldername,
+                'url':self.url
+            }
