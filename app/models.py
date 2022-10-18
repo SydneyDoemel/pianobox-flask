@@ -36,8 +36,6 @@ class User(db.Model, UserMixin):
         db.session.commit()
 
   
-
-
 class Songs(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     song_url =db.Column(db.String(500))
